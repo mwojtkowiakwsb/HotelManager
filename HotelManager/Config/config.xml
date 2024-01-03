@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<hotelName>"Promyk"</hotelName>
+	<hotelColor>Yellow</hotelColor>
+	<rooms>
+		<room>
+			<roomId>60</roomId>
+			<isAvailable>true</isAvailable>
+			<price>190</price>
+			<description>Kawalerka</description>
+			<type>Common</type>
+		</room>
+		<room>
+			<roomId>93</roomId>
+			<isAvailable>true</isAvailable>
+			<price>100</price>
+			<description>Pokój dwuosobowy</description>
+			<type>Common</type>
+		</room>
+		<room>
+			<roomId>90</roomId>
+			<isAvailable>true</isAvailable>
+			<price>90</price>
+			<description>Pokój luksusowy</description>
+			<type>Luxurious</type>
+		</room>
+	</rooms>
+	<users>
+		<user>
+			<email>test123@gmail.com</email>
+			<password>pass123</password>
+			<balance>799.5</balance>
+			<isAdmin>true</isAdmin>
+		</user>
+		<user>
+			<email>test@gmail.com</email>
+			<password>test1!</password>
+			<balance>799.5</balance>
+			<isAdmin>false</isAdmin>
+		</user>
+		<user>
+			<email>nowyemail@gmail.com</email>
+			<password>nowe12345!</password>
+			<balance>500</balance>
+			<isAdmin>false</isAdmin>
+		</user>
+	</users>
+</Root>

@@ -1,0 +1,44 @@
+{
+  "hotelName": "\u0022Promyk\u0022",
+  "hotelColor": "Red",
+  "rooms": [
+    {
+      "isAvailable": true,
+      "price": 190,
+      "description": "Kawalerka",
+      "type": "Common"
+    },
+    {
+      "isAvailable": true,
+      "price": 250,
+      "description": "Pokój dwuosobowy",
+      "type": "Common"
+    },
+    {
+      "isAvailable": true,
+      "price": 390,
+      "description": "Luksusowy pokój dwuosobowy",
+      "type": "Luxurious"
+    }
+  ],
+  "users": [
+    {
+      "email": "test123@gmail.com",
+      "password": "pass1234",
+      "balance": 799.5,
+      "isAdmin": true
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "test1!",
+      "balance": 500,
+      "isAdmin": false
+    },
+    {
+      "email": "nowyemail@gmail.com",
+      "password": "nowe12345!",
+      "balance": 500,
+      "isAdmin": false
+    }
+  ]
+}
