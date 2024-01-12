@@ -68,6 +68,10 @@ namespace HotelManager.Authorization
             {
                 throw new ArgumentException("Hasło nie może być puste");
             }
+            if (_userRepository.GetByEmailAndPassword(email, password) != null)
+            {
+                throw new ArgumentException($"Użytkownik z emailem {email} już istnieje");
+            }
         }
     }
 }
