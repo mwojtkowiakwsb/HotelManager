@@ -168,6 +168,10 @@ namespace HotelManager.Factories
                                 hotel.CancelBookedRoom(selectedRoomForCancellation);
                                 break;
                             case 5:
+                                if (hotel.BookedRooms.Count == 0)
+                                {
+                                    throw new ArgumentException("By przejść do płatności musisz mieć wybrane pokoje. Kliknij enter by powrócić do menu i zarezerwować pokój");
+                                }
                                 Console.WriteLine("Przechodzisz do płatności");
                                 Console.WriteLine("Zarezerwowane pokoje: ");
                                 hotel.ShowBookedRooms(ShowSingleRoomOption.ShowWithoutAvailability);
