@@ -11,7 +11,6 @@ namespace HotelManager
 {
     public class Program
     {
-        private static readonly ConfigReaderEnum ConfigEnum = ConfigReaderEnum.XML;
         private static readonly bool InitialLoad = true;
         private static string GetConfigPath(string extension) => Path.Join(Directory.GetCurrentDirectory(), $"Config\\config.{extension}");
 
@@ -24,9 +23,20 @@ namespace HotelManager
             var hotel = new Hotel(roomRepository);
 
             Console.WriteLine(">>>>>>>> WCZYTYWANIE KONFIGURACJI SYSTEMU >>>>>>>>");
-            var configReader = new ConfigReaderFactory().GetConfigReader(ConfigEnum);
-            var configPath = GetConfigPath(ConfigEnum.ToString().ToLower());
-            var config = configReader.ReadConfig<ConfigModel>(configPath);
+            var jsonConfigReader = new ConfigReaderFactory().GetConfigReader(ConfigReaderEnum.JSON);
+            var configType = jsonConfigReader.ReadConfig<ConfigTypeModel>(Path.Join(Directory.GetCurrentDirectory(), $"Config\\configType.json"));
+            var configPath = GetConfigPath(configType.ConfigType.ToString());
+            ConfigModel config;
+
+            if (configType.ConfigType.ToLower() == ConfigReaderEnum.JSON.ToString().ToLower())
+            {
+                config = jsonConfigReader.ReadConfig<ConfigModel>(configPath);
+            } else
+            {
+                var xmlConfigReader = new ConfigReaderFactory().GetConfigReader(ConfigReaderEnum.XML);
+                config = xmlConfigReader.ReadConfig<ConfigModel>(configPath);
+            }
+
             if (config.Rooms == null)
             {
                 throw new ArgumentNullException("Nie dodano pokoi w pliku konfiguracyjnym");
