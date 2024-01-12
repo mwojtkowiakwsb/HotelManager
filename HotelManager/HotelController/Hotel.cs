@@ -36,7 +36,13 @@ namespace HotelManager.HotelController
             Console.WriteLine("Wyświetlanie POKOI");
             roomRepository.GetRoomsWithType(roomType).ToList().ForEach(room =>
                 {
-                    ShowSingleRoom(room);
+                    if (!room.IsAvailable)
+                    {
+                        ShowSingleRoom(room, booked: true);
+                    } else
+                    {
+                        ShowSingleRoom(room);
+                    }
                 });
         }
 
@@ -95,13 +101,15 @@ namespace HotelManager.HotelController
             }
         }
 
-        public bool BookRoom(int roomId)
+        public bool BookRoom(int roomId, DateTime startDate, DateTime endDate)
         {
             Console.WriteLine($"Rezerwowanie pokoju o numerze {roomId}");
             var roomToBook = GetRoomToBook(roomId); 
             var isRoomAvailable = CheckIfRoomIsAvailable(roomToBook);
             if (isRoomAvailable)
             {
+                roomToBook.SetStartDate(startDate);
+                roomToBook.SetEndDate(endDate);
                 roomToBook.SetAvailability(false);
                 Console.WriteLine($"Pokój o numerze {roomToBook.RoomId} został zarezerwowany!");
                 _bookedRooms.Add(roomToBook);
@@ -115,7 +123,7 @@ namespace HotelManager.HotelController
         {
             Console.WriteLine("WYŚWIETLANIE ZAREZERWOWANYCH POKOI");
             if (BookedRooms.Count == 0) Console.WriteLine("Brak zarezerwowanych pokoi");
-            else BookedRooms.ToList().ForEach((room) => ShowSingleRoom(room, option));
+            else BookedRooms.ToList().ForEach((room) => ShowSingleRoom(room, option, true));
         }
 
         public void SetPayment(IPaymentStrategy paymentStrategy)
@@ -135,12 +143,12 @@ namespace HotelManager.HotelController
             return false;
         }
 
-        private void ShowSingleRoom(IRoom room, ShowSingleRoomOption option = ShowSingleRoomOption.ShowWithAvailability)
+        private void ShowSingleRoom(IRoom room, ShowSingleRoomOption option = ShowSingleRoomOption.ShowWithAvailability, bool booked = false)
         {
-            ShowSingleRoom(new RoomInfo() { Id = room.RoomId, Description = room.Description, IsAvailable = room.IsAvailable, Type = room.RoomType.ToString(), Price = room.Price }, option);
+            ShowSingleRoom(new RoomInfo() { Id = room.RoomId, Description = room.Description, IsAvailable = room.IsAvailable, Type = room.RoomType.ToString(), Price = room.Price, StartDate = room.StartDate, EndDate = room.EndDate }, option, booked);
         }
 
-        private void ShowSingleRoom(RoomInfo room, ShowSingleRoomOption option = ShowSingleRoomOption.ShowWithAvailability)
+        private void ShowSingleRoom(RoomInfo room, ShowSingleRoomOption option = ShowSingleRoomOption.ShowWithAvailability, bool booked = false)
         {
             Console.WriteLine($">>>>>>>POKÓJ {room.Id}<<<<<<<<<");
             Console.WriteLine(room.Description);
@@ -150,6 +158,11 @@ namespace HotelManager.HotelController
             }
             Console.WriteLine($"Cena: {room.Price}");
             Console.WriteLine($"Typ: {RoomDictionary.RoomTypeDict[room.RoomType]}");
+            if (booked)
+            {
+                Console.WriteLine($"Od: {room.StartDate.ToString("dd.MM.yyy")}");
+                Console.WriteLine($"Do: {room.EndDate.ToString("dd.MM.yyy")}");
+            }
             Console.WriteLine($">>>>>>>><<<<<<<<<");
         }
 

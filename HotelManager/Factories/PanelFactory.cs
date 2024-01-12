@@ -130,7 +130,11 @@ namespace HotelManager.Factories
                                         case 1:
                                             Console.WriteLine("Podaj numer pokoju");
                                             var roomId = ConsoleUtils.ReadInt();
-                                            isBooked = hotel.BookRoom(roomId);
+                                            Console.WriteLine("Podaj date przyjazdu");
+                                            var startDate = ConsoleUtils.ReadDate();
+                                            Console.WriteLine("Podaj date odjazdu");
+                                            var endDate = ConsoleUtils.ReadDate();
+                                            isBooked = hotel.BookRoom(roomId, startDate, endDate);
                                             break;
                                         case 2:
                                             Console.WriteLine("Wracasz do menu głównego");

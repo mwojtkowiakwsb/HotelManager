@@ -19,6 +19,8 @@ namespace HotelManager.Model
         [JsonPropertyName("type")]
         [XmlElement("type")]
         public string Type { get; set; } = null!;
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [JsonIgnore]
         public RoomType RoomType => Enum.Parse<RoomType>(Type);

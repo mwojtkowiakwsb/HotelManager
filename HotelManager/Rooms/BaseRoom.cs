@@ -11,6 +11,8 @@ namespace HotelManager.Rooms
         public double Price { get; private set; }
         public RoomType RoomType { get; private set; }
         public List<Type> UsedDecorators { get; private set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
 
         public BaseRoom(RoomInfo hotelInfo)
         {
@@ -25,6 +27,16 @@ namespace HotelManager.Rooms
         public void SetAvailability(bool availability)
         {
             IsAvailable = availability;
+        }
+
+        public void SetStartDate(DateTime startDate)
+        {
+            StartDate = startDate;
+        }
+
+        public void SetEndDate(DateTime endDate)
+        {
+            EndDate = endDate;
         }
     }
 }

@@ -36,5 +36,22 @@ namespace HotelManager.Utils
            }
            return userInput;
         }
+
+        public static DateTime ReadDate()
+        {
+            string userInput = Console.ReadLine();
+
+            string dateFormat = "dd.MM.yyyy";
+
+            if (DateTime.TryParseExact(userInput, dateFormat, null, System.Globalization.DateTimeStyles.None, out DateTime result))
+            {
+                return result;
+            }
+            else
+            {
+                Console.WriteLine("Zły format. Podaj datę w formacie dzien.miesiac.rok");
+                return ReadDate();
+            }
+        }
     }
 }

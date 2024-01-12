@@ -7,7 +7,7 @@ namespace HotelManager.HotelController
 {
     public interface IHotel
     {
-        public bool BookRoom(int bookId);
+        public bool BookRoom(int bookId, DateTime startDate, DateTime endDate);
 
         public void ListRoomsWithGivenType(RoomType roomType);
 

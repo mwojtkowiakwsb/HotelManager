@@ -39,7 +39,10 @@ namespace HotelManager.Repository
         {
             roomsListWithNewProperties.ToList().ForEach(newRoom =>
             {
-                GetRoomById(newRoom.RoomId).IsAvailable = newRoom.IsAvailable;
+                var roomWithId = GetRoomById(newRoom.RoomId);
+                roomWithId.IsAvailable = newRoom.IsAvailable;
+                roomWithId.StartDate = newRoom.StartDate;
+                roomWithId.EndDate = newRoom.EndDate;
             });
             _hotelContext.SaveChanges();
         }
